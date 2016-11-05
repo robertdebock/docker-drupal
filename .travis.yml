@@ -25,9 +25,10 @@ install:
   --env MY_NETWORKS=${MY_NETWORKS} \
   --env ROOT_ALIAS=${ROOT_ALIAS} \
   --env MAILNAME=${MAILNAME}
-- docker run -p 80:80 robertdebock/docker-drupal \
+- docker run -p 80:80 \
   --link=mysql \
-  --link=postfix
+  --link=postfix \
+  robertdebock/docker-drupal
 
 script:
 - docker run -v $(pwd):${DIR} ${CONTAINER} /bin/sh ${DIR}/scripts/publish-s3.sh -r eu-west-1 -b apache-tomcat7.el7 -k ${S3KEY} -s ${S3SECRET} -d /data/repository/

@@ -25,13 +25,12 @@ install:
   --env MY_NETWORKS=${MY_NETWORKS} \
   --env ROOT_ALIAS=${ROOT_ALIAS} \
   --env MAILNAME=${MAILNAME}
+
+script:
 - docker run -p 80:80 \
   --link=mysql \
   --link=postfix \
   robertdebock/docker-drupal
-
-script:
-- docker run -p 80:80 robertdebock/docker-drupal
 - wget http://localhost/drupal
 - docker kill -l
 

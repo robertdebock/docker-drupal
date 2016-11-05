@@ -16,18 +16,18 @@ env:
 
 install:
 - docker build . -t robertdebock/docker-drupal
-- docker run -d mysql \
+
+script:
+- docker run -n mysql -d mysql \
   --env MYSQL_ALLOW_EMPTY_PASSWORD=${MYSQL_ALLOW_EMPTY_PASSWORD} \
   --env MYSQL_USER=${MYSQL_USER} \
   --env MYSQL_PASSWORD=${MYSQL_PASSWORD} \
   --env MYSQL_DATABASE=${MYSQL_DATABASE}
-- docker run -d tozd/postfix \
+- docker run -n postfix -d tozd/postfix \
   --env MY_NETWORKS=${MY_NETWORKS} \
   --env ROOT_ALIAS=${ROOT_ALIAS} \
   --env MAILNAME=${MAILNAME}
-
-script:
-- docker run -p 80:80 \
+- docker run \
   --link=mysql \
   --link=postfix \
   robertdebock/docker-drupal

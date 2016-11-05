@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/robertdebock/docker-drupal.svg?branch=master)](https://travis-ci.org/robertdebock/docker-drupal)
+
 A Docker container for Drupal, including Drush, based on Alpine.
 
 # Usage

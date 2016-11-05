@@ -21,7 +21,7 @@ install:
   --env MYSQL_USER=${MYSQL_USER} \
   --env MYSQL_PASSWORD=${MYSQL_PASSWORD} \
   --env MYSQL_DATABASE=${MYSQL_DATABASE}
-- docker run -d tozd/postgix \
+- docker run -d tozd/postfix \
   --env MY_NETWORKS=${MY_NETWORKS} \
   --env ROOT_ALIAS=${ROOT_ALIAS} \
   --env MAILNAME=${MAILNAME}

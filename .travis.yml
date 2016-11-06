@@ -12,24 +12,31 @@ env:
     - MY_NETWORKS=10.0.0.0/8 172.0.0.0/8 192.168.0.0/16 127.0.0.0/8
     - ROOT_ALIAS=robert@meinit.nl
     - MAILNAME=drupal.meinit.nl
-
+    - DBURL=mysql://drupal:drupal@mysql/drupal
+    - DBHOST=mysql
+    - SITENAME=drupal
+    - ADMINPASS=newpass
 
 install:
 - docker build . -t robertdebock/docker-drupal
 
 script:
 - docker run -n mysql -d mysql \
-  --env MYSQL_ALLOW_EMPTY_PASSWORD=${MYSQL_ALLOW_EMPTY_PASSWORD} \
-  --env MYSQL_USER=${MYSQL_USER} \
-  --env MYSQL_PASSWORD=${MYSQL_PASSWORD} \
-  --env MYSQL_DATABASE=${MYSQL_DATABASE}
+  -e MYSQL_ALLOW_EMPTY_PASSWORD=${MYSQL_ALLOW_EMPTY_PASSWORD} \
+  -e MYSQL_USER=${MYSQL_USER} \
+  -e MYSQL_PASSWORD=${MYSQL_PASSWORD} \
+  -e MYSQL_DATABASE=${MYSQL_DATABASE}
 - docker run -n postfix -d tozd/postfix \
-  --env MY_NETWORKS=${MY_NETWORKS} \
-  --env ROOT_ALIAS=${ROOT_ALIAS} \
-  --env MAILNAME=${MAILNAME}
+  -e MY_NETWORKS=${MY_NETWORKS} \
+  -e ROOT_ALIAS=${ROOT_ALIAS} \
+  -e MAILNAME=${MAILNAME}
 - docker run \
   --link=mysql \
   --link=postfix \
+  -e DBURL=${DBURL} \
+  -e DBHOST=${DBHOST} \
+  -e SITENAME=${SITENAME} \
+  -e ADMINPASS=${ADMINPASS} \
   robertdebock/docker-drupal
 - wget http://localhost/drupal
 - docker kill -l

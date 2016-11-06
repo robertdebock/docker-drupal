@@ -21,14 +21,7 @@ install:
 - docker build . -t robertdebock/docker-drupal
 
 script:
-- docker run \
-  --name mysql \
-  --detacht \
-  --env MYSQL_ALLOW_EMPTY_PASSWORD=${MYSQL_ALLOW_EMPTY_PASSWORD} \
-  --env MYSQL_USER=${MYSQL_USER} \
-  --env MYSQL_PASSWORD=${MYSQL_PASSWORD} \
-  --env MYSQL_DATABASE=${MYSQL_DATABASE} \
-  mysql
+- docker run --name mysql --detach --env MYSQL_ALLOW_EMPTY_PASSWORD=${MYSQL_ALLOW_EMPTY_PASSWORD} --env MYSQL_USER=${MYSQL_USER} --env MYSQL_PASSWORD=${MYSQL_PASSWORD} --env MYSQL_DATABASE=${MYSQL_DATABASE} mysql
   
 - docker run tozd/postfix \
   --name postfix \

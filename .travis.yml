@@ -25,7 +25,7 @@ script:
 - docker run --name postfix --detach --env MY_NETWORKS=${MY_NETWORKS} --env ROOT_ALIAS=${ROOT_ALIAS} --env MAILNAME=${MAILNAME} tozd/postfix
 - docker run --name drupal --detach --link=mysql --link=postfix --env DBURL=${DBURL} --env DBHOST=${DBHOST} --env SITENAME=${SITENAME} --env ADMINPASS=${ADMINPASS} robertdebock/docker-drupal
 - echo "Waiting 60 seconds for Drupal to become availale."
-- timer=60 ; while [ ${timer} -gt 0 ] ; do sleep 3 ; timer=$[${timer}-1] ; echo "${timer}" ; done
+- timer=60 ; while [ ${timer} -gt 0 ] ; do sleep 6 ; timer=$[${timer}-6] ; echo "${timer}" ; done
 - wget http://localhost/drupal
 
 notifications:

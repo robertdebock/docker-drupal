@@ -27,7 +27,10 @@ script:
 - echo "Waiting 60 seconds for Drupal to become availale."
 - timer=60 ; while [ ${timer} -gt 0 ] ; do sleep 6 ; timer=$[${timer}-6] ; echo "${timer}" ; done
 - curl http://localhost/drupal
-- curl -X POST -i -H "Content-type: application/json" -c cookies.txt http://localhost/drupal/user/login -d '{ "username":"admin", "password":"newpass"}'
+- curl --request POST \
+  --header "Content-type: application/json" \
+  --data '{ "username":"admin", "password":"newpass"}' \
+  --cookie cookies.txt http://localhost/drupal/user/login
 
 notifications:
   email: false

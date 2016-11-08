@@ -4,7 +4,7 @@
 }
 
 @test "Logging in to Drupal." {
-  run curl --request POST --header "Content-type: application/json" --data '{ "username":"admin", "password":"newpass"}' --cookie-jar cookies.txt http://localhost/drupal/user/login
+  run curl http://localhost/drupal/user/login --cookie-jar cookie.txt --cookie cookie.txt -F 'name=admin' -F 'pass=newpass' -F 'form_id=user_login_form' -F 'op=Log+in'
   [ "${status}" -eq 0 ]
 }
 

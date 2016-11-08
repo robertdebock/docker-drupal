@@ -8,6 +8,11 @@
   [ "${status}" -eq 0 ]
 }
 
+@test "Checking for cookies.txt." {
+  run test -f cookies.txt
+  [ "${status}" -eq 0 ]
+}
+
 @test "Checking status report." {
   run curl http://localhost/drupal/admin/reports/status --cookie cookies.txt | grep -- 'system-status-report__entry system-status-report__entry--error'
   [ "${status}" -eq 1 ]

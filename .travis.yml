@@ -24,7 +24,7 @@ script:
 - docker run --name mysql --detach --env MYSQL_ALLOW_EMPTY_PASSWORD=${MYSQL_ALLOW_EMPTY_PASSWORD} --env MYSQL_USER=${MYSQL_USER} --env MYSQL_PASSWORD=${MYSQL_PASSWORD} --env MYSQL_DATABASE=${MYSQL_DATABASE} mysql
 - docker run --name postfix --detach --env MY_NETWORKS=${MY_NETWORKS} --env ROOT_ALIAS=${ROOT_ALIAS} --env MAILNAME=${MAILNAME} tozd/postfix
 - docker run --name drupal --detach --publish 80:80 --link=mysql --link=postfix --env DBURL=${DBURL} --env DBHOST=${DBHOST} --env SITENAME=${SITENAME} --env ADMINPASS=${ADMINPASS} robertdebock/docker-drupal
-- echo "Waiting 60 seconds for Drupal to become availale."
+- echo "Waiting 45 seconds for Drupal to become availale."
 - timer=45 ; while [ ${timer} -gt 0 ] ; do sleep 6 ; timer=$[${timer}-6] ; echo "${timer}" ; done
 - bats tests/
 

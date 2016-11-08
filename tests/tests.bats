@@ -4,26 +4,26 @@
 }
 
 @test "Logging in to Drupal." {
-  run curl http://localhost/drupal/user/login --cookie-jar cookie.txt --cookie cookie.txt -F 'name=admin' -F 'pass=newpass' -F 'form_id=user_login_form' -F 'op=Log+in'
+  run curl http://localhost/drupal/user/login --cookie-jar cookie.txt -F 'name=admin' -F 'pass=newpass' -F 'form_id=user_login_form' -F 'op=Log+in'
   [ "${status}" -eq 0 ]
 }
 
 @test "Checking status report." {
-  run curl --request POST --header "Content-type: application/json" --cookie cookies.txt http://localhost/drupal/admin/reports/status | grep system-status-report__entry system-status-report__entry--error
+  run curl http://localhost/drupal/user/1 --cookie cookies.txt | grep system-status-report__entry system-status-report__entry--error
   [ "${status}" -ne 0 ]
 }
 
 @test "Logging out of Drupal." {
-  run curl --request POST --header "Content-type: application/json" --cookie-jar cookies.txt http://localhost/drupal/user/logout
+  run curl --cookie-jar cookies.txt http://localhost/drupal/user/logout
   [ "${status}" -eq 0 ]
 }
 
 @test "Searching for content." {
-  run curl --request GET http://localhost/drupal/search/node?keys=content
+  run curl http://localhost/drupal/search/node?keys=content
   [ "${status}" -eq 0 ]
 }
 
 @test "False logging in to Drupal." {
-  run curl --request POST --header "Content-type: application/json" --data '{ "username":"admin", "password":"incorrectpass"}' https://localhost/drupal/user/login
+  run curl http://localhost/drupal/user/login --cookie-jar cookie.txt -F 'name=admin' -F 'pass=incorrectpass' -F 'form_id=user_login_form' -F 'op=Log+in'
   [ "${status}" -ne 0 ]
 }

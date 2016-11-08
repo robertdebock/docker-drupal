@@ -27,6 +27,8 @@ script:
 - echo "Waiting 45 seconds for Drupal to become availale."
 - timer=45 ; while [ ${timer} -gt 0 ] ; do sleep 6 ; timer=$[${timer}-6] ; echo "${timer}" ; done
 - bats tests/
+- cat cookies.txt
+- curl http://localhost/drupal/admin/reports/status --cookie cookies.txt
 
 notifications:
   email: false

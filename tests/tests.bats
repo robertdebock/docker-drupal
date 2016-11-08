@@ -10,7 +10,7 @@
 
 @test "Checking status report." {
   run curl http://localhost/drupal/user/1 --cookie cookies.txt | grep -- 'system-status-report__entry system-status-report__entry--error'
-  [ "${status}" -ne 0 ]
+  [ "${status}" -eq 1 ]
 }
 
 @test "Logging out of Drupal." {

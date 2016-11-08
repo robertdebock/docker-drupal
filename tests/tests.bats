@@ -9,7 +9,7 @@
 }
 
 @test "Checking status report." {
-  run curl http://localhost/drupal/user/1 --cookie cookies.txt | grep -- 'system-status-report__entry system-status-report__entry--error'
+  run curl http://localhost/drupal/admin/reports/status --cookie cookies.txt | grep -- 'system-status-report__entry system-status-report__entry--error'
   [ "${status}" -eq 1 ]
 }
 

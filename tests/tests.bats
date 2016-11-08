@@ -14,7 +14,7 @@
 }
 
 @test "Checking status report." {
-  run curl http://localhost/drupal/admin/reports/status --cookie cookies.txt | grep 'color-error'
+  run bash -c "curl http://localhost/drupal/admin/reports/status --cookie cookies.txt | grep 'color-error'"
   [ "${status}" -ne 0 ]
 }
 

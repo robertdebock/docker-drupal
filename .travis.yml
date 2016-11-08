@@ -26,7 +26,7 @@ script:
 - docker run --name drupal --detach --publish 80:80 --link=mysql --link=postfix --env DBURL=${DBURL} --env DBHOST=${DBHOST} --env SITENAME=${SITENAME} --env ADMINPASS=${ADMINPASS} robertdebock/docker-drupal
 - echo "Waiting 60 seconds for Drupal to become availale."
 - timer=60 ; while [ ${timer} -gt 0 ] ; do sleep 6 ; timer=$[${timer}-6] ; echo "${timer}" ; done
-- bats tests/tests.bats
+- bats tests/
 
 notifications:
   email: false

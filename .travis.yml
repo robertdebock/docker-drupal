@@ -18,9 +18,7 @@ env:
     - ADMINPASS=newpass
 
 install:
-- docker images -a
 - docker build . -t robertdebock/docker-drupal
-- docker images -a
 
 script:
 - docker run --name mysql --detach --env MYSQL_ALLOW_EMPTY_PASSWORD=${MYSQL_ALLOW_EMPTY_PASSWORD} --env MYSQL_USER=${MYSQL_USER} --env MYSQL_PASSWORD=${MYSQL_PASSWORD} --env MYSQL_DATABASE=${MYSQL_DATABASE} mysql

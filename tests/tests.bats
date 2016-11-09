@@ -14,8 +14,9 @@
 }
 
 @test "Checking status report." {
-  run bash -c "curl http://localhost/drupal/admin/reports/status --cookie cookies.txt | grep 'color-error'"
-  [ "${status}" -ne 0 ]
+  run curl http://localhost/drupal/admin/reports/status --cookie cookies.txt
+  [ "${status}" -eq 0 ]
+  [ $(expr "${output}" : "color-error") -eq 0 ]
 }
 
 @test "Logging out of Drupal." {

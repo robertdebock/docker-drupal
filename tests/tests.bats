@@ -38,9 +38,3 @@
   run curl http://localhost/drupal/user/login --cookie-jar cookies.txt -F 'name=admin' -F 'pass=incorrectpass' -F 'form_id=user_login_form' -F 'op=Log+in'
   [ "${status}" -eq 0 ]
 }
-
-@test "Checking for non-existing cookies.txt." {
-  run test -f cookies.txt
-  [ "${status}" -ne 0 ]
-}
-

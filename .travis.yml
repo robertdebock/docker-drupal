@@ -22,8 +22,8 @@ install:
 
 script:
 - docker-compose up -d
-- echo "Waiting 45 seconds for Drupal to become availale."
-- timer=45 ; while [ ${timer} -gt 0 ] ; do sleep 6 ; timer=$[${timer}-6] ; echo "${timer}" ; done
+- echo "Waiting 45 seconds for Drupal to become availale." && \
+  until [ $(curl http://localhost/drupal/ > /dev/null 2>&1 ; echo $?) -eq 0 ] ; do echo -n "." ; sleep 2 ; done
 - bats tests/
 
 notifications:

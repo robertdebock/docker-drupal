@@ -1,16 +1,26 @@
 version: '2'
 services:
   drupal:
-    image: drupal
+    image: robertdebock/docker-drupal
     ports:
       - 80:80
-      - 443:443
-    links:
-      - mysql
+    environment:
+      DBURL=mysql://drupal:drupal@mysql/drupal
+      DBHOST=mysql
+      SITENAME=Drupal
+      ADMINPASS=newpass
+      
   mysql:
     image: mysql
     environment:
-      MYSQL_USER: drupal
-      MYSQL_PASSWORD: drupal
-      MYSQL_DATABASE: drupal
-      MYSQL_ROOT_PASSWORD: drupal
+      MYSQL_USER=drupal
+      MYSQL_PASSWORD=drupal
+      MYSQL_DATABASE=drupal
+      MYSQL_ROOT_PASSWORD=drupal
+      
+  postfix:
+    image: tozd/postfix
+    environment:
+      MY_NETWORKS=10.0.0.0/8 172.0.0.0/8 192.168.0.0/16 127.0.0.0/8
+      ROOT_ALIAS=robert@meinit.nl
+      MAILNAME=drupal.meinit.nl

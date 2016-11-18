@@ -35,6 +35,6 @@
 }
 
 @test "False logging in to Drupal." {
-  run curl http://localhost/drupal/user/login --cookie-jar cookies.txt -F 'name=admin' -F 'pass=incorrectpass' -F 'form_id=user_login_form' -F 'op=Log+in' --fail
-  [ "${status}" -ne 0 ]
+  run curl http://localhost/drupal/user/login --cookie-jar cookies.txt -F 'name=admin' -F 'pass=incorrectpass' -F 'form_id=user_login_form' -F 'op=Log+in'
+  [ $(echo ${output} | grep "Unrecognized username or password" > /dev/null 2>&1 ; echo $?) -eq 0 ]
 }

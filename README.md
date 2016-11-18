@@ -21,39 +21,4 @@ But; you're missing settings. You can set these variables to customize the insta
 |MAILSERVER|postfix|The (resolvable) hostname (or IP address) used to send mail.|
 |MAILFROM|robert@meinit.nl|The address to use when Drupal sends mail.|
 
-It's quite logical to start this container with Docker Compose; which can be used to setup the required other containers. The docker-compose.yml file may look like this:
-
-    version: '2'
-    services:
-      drupal:
-        image: robertdebock/drupal
-        build: drupal
-        environment:
-          - DBURL=mysql://drupal:drupal@mysql/drupal
-          - DBHOST=mysql
-          - SITENAME=drupal
-          - ADMINPASS=newpass
-        ports:
-          - 80:80
-          - 443:443
-        links:
-          - mysql
-          - postfix
-        volumes:
-          - /var/www/html
-      postfix:
-        image: tozd/postfix
-        environment:
-          - MY_NETWORKS=10.0.0.0/8 172.0.0.0/8 192.168.0.0/16 127.0.0.0/8
-          - ROOT_ALIAS=robert@meinit.nl
-          - MAILNAME=drupal.meinit.nl
-      mysql:
-        image: mysql
-        environment:
-          - MYSQL_ALLOW_EMPTY_PASSWORD=true
-          - MYSQL_USER=drupal
-          - MYSQL_PASSWORD=drupal
-          - MYSQL_DATABASE=drupal
-        volumes:
-          - ./data/var/lib/mysql:/var/lib/mysql
-
+It's quite logical to start this container with Docker Compose; which can be used to setup the required other containers. See docker-compose.yml" for an initial configuation.

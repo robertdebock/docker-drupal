@@ -2,7 +2,7 @@ FROM alpine
 
 MAINTAINER Robert de Bock <robert@meinit.nl>
 
-LABEL Description="Drupal" Vendor="Me in IT Consultancy" Version="8.2.2"
+LABEL Description="Drupal" Vendor="Me in IT Consultancy" Version="8.2.4"
 
 EXPOSE 80 443
 

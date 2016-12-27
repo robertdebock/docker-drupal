@@ -84,6 +84,6 @@ CMD echo '$settings["'"trusted_host_patterns"'"] = array(' >> /var/www/localhost
     waitforit --timeout ${TIMEOUT} -host ${DBHOST} -port ${DBPORT} && \
     cd /var/www/localhost/htdocs/drupal && \
     drush --yes si standard --db-url=${DBURL} --site-name=${SITENAME} && \
-    drush upwd --password="${ADMINPASS}" "admin" && \
+    drush user-password admin --password="${ADMINPASS}" && \
     chown -R apache:apache /var/www/localhost/htdocs/drupal && \
     httpd -D FOREGROUND

@@ -2,6 +2,9 @@ version: '2'
 services:
   drupal:
     image: robertdebock/docker-drupal
+    depends_on:
+      - mysql
+      - postfix
     ports:
       - 80:80
     environment:

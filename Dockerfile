@@ -2,7 +2,7 @@ FROM alpine
 
 MAINTAINER Robert de Bock <robert@meinit.nl>
 
-LABEL Description="Drupal" Vendor="Me in IT Consultancy" Version="8.2.2"
+LABEL Description="Drupal" Vendor="Me in IT Consultancy" Version="8.2.4"
 
 EXPOSE 80 443
 
@@ -84,6 +84,6 @@ CMD echo '$settings["'"trusted_host_patterns"'"] = array(' >> /var/www/localhost
     waitforit --timeout ${TIMEOUT} -host ${DBHOST} -port ${DBPORT} && \
     cd /var/www/localhost/htdocs/drupal && \
     drush --yes si standard --db-url=${DBURL} --site-name=${SITENAME} && \
-    drush upwd --password="${ADMINPASS}" "admin" && \
+    drush user-password admin --password "${ADMINPASS}" && \
     chown -R apache:apache /var/www/localhost/htdocs/drupal && \
     httpd -D FOREGROUND
